@@ -8,7 +8,7 @@ from azureml.data.dataset_factory import TabularDatasetFactory
 from azureml.core.run import Run
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
@@ -47,9 +47,9 @@ def main():
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
 
-    #Saving model for current iteration, including the value for C and max_iter in filename
+    #Saving model for current iteration, including the value for n_estimators and min_samples_split in filename
     os.makedirs('outputs', exist_ok=True)
-    joblib.dump(model, 'outputs/hyperDrive_{}_{}'.format(args.C, args.max_iter))
+    joblib.dump(model, 'outputs/hyperDrive_{}_{}'.format(args.n_estimators, min_samples_split))
 
 if __name__ == '__main__':
     main()
