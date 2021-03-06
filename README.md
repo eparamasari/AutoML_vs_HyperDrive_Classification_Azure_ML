@@ -16,7 +16,7 @@ This project uses:
 
 ### Overview
 
-This is a binary classification task that will predict death by heart failure. The dataset was initially acquired from Kaggle at <https://www.kaggle.com/andrewmvd/heart-failure-clinical-data>. The dataset has thirteen columns and can be used to predict whether the event of death occur or not.
+This is a binary classification task that will predict death by heart failure. The dataset was initially acquired from Kaggle at [this link](https://www.kaggle.com/andrewmvd/heart-failure-clinical-data). The dataset has thirteen columns and can be used to predict whether the event of death occur or not.
 
 ### Task
 
@@ -38,7 +38,7 @@ These are the thirteen columns in the dataset, with twelve independent features 
 
 ### Access
 
-The data was available publicly in a github repo and accessed at <https://raw.githubusercontent.com/eparamasari/ML_Engineer_ND_Capstone/main/data/heart_failure_clinical_records_dataset.csv> before being changed into a tabular dataset.
+The data was available publicly in a github repo and accessed at [this link](https://raw.githubusercontent.com/eparamasari/ML_Engineer_ND_Capstone/main/data/heart_failure_clinical_records_dataset.csv) before being changed into a tabular dataset.
 
 ## Automated ML
 
