@@ -8,14 +8,15 @@ In this project, a binary classification model was trained to predict the event 
 This project uses:
 
 - Jupyter Notebook 6
-- Python 3.7
-- Azure ML
+- Python 3.6
+- Azure ML Studio
+- Azure ML SDK
 
 ## Dataset
 
 ### Overview
 
-This is a binary classification task that will predict death by heart failure. The dataset was acquired from Kaggle at <https://www.kaggle.com/andrewmvd/heart-failure-clinical-data>. The dataset has thirteen columns and can be used to predict whether the event of death occur or not.
+This is a binary classification task that will predict death by heart failure. The dataset was initially acquired from Kaggle at <https://www.kaggle.com/andrewmvd/heart-failure-clinical-data>. The dataset has thirteen columns and can be used to predict whether the event of death occur or not.
 
 ### Task
 
@@ -41,40 +42,80 @@ The data was available publicly in a github repo and accessed at <https://raw.gi
 
 ## Automated ML
 
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+The AutoML settings and configuration used for this experiment were as follows:
+
+AutoML Settings:
+
+- Experiment timeout: 20 minutes
+- Maximum number of concurrent iterations: 5
+- Primary evaluation metric: accuracy
+
+AutoML configurations:
+
+- type of task: classification
+- Compute target: a newly created compute cluster saved in the variable compute_target
+- Training data was saved in the variable ds for dataset
+- Label column name: DEATH_EVENT
+- Number of cross validations: 5
 
 ### AutoML Results
 
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
+The best model was found to be **Voting Ensemble** with an accuracy of 0.89 and AUC Weighted of 0.91. Voting Ensemble is model which takes into account predictions from all the different models previously trained with the same data, thus makes it a very robust model in the end.
 
-The best model was found to be ... with and accuracy of
+For further improvement, one can enable deep learning (for classification tasks such as this), change the number cross validations, and increase the training job time.
 
-For further improvement, one can try and change the hyperparameters
+Here is a screenshot of the AutoML Run Details widget while it was running:
 
-*TODO* Remember to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+![RunDetails](img/automl-01-run-details-running.jpg "AutoML RunDetails Widget while Running")
 
-## Hyperparameter Tuning
+And here it is again when it was completed.
 
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+![RunDetails](img/automl-01-run-details-completed.jpg "AutoML RunDetails Widget when Completed")
 
-Logistic Regression was chosen in this run, since it is one of the best algorithm for a binary classification task.
+Here is another one showing the evaluation metric accuracy.
+
+![RunDetails](img/automl-01-run-details-metric-accuracy.jpg "AutoML RunDetails Widget showing the Evaluation Metric: Accuracy")
+
+And the image below shows the best model retrieved from the AutoML Run.
+
+![RunDetails](img/automl-03-best-model.jpg "AutoML Best Model")
+
+## Hyperparameter Tuning with HyperDrive
+
+The second run was a HyperDrive run, where hyperparameter tuning was automated with the HyperDrive package.
+
+Random Forest, or random decision forests, was chosen in this run, since it is one of the best algorithm for a binary classification task. As an ensemble learning method, it is generally better than decision trees and some other classification algorithms. An early termination policy, Bandit Policy, was used since it allows termination of runs which do not reach the specified slack factor within the specified time thus it is time saving.
+
+The hyperparameters used in this run includes the number of estimators and the minimum number of samples required to split an internal node.
 
 ### HyperDrive Run Results
 
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
+The best run, with an accuracy of 0.755, was achieved with 20 estimators and 4 as minimum number of samples required to split an internal node.
 
-To improve the results, one can try to use other types of classification models, such as Decision Tree or Random Forest Classifier, in the HyperDrive Run, to see if it would be better than than the Automated ML
+To improve the results of similar experiments, one can try to use other types of classification models, such as logistic regression or gradient boosted trees, in the HyperDrive Run, to see if it would result in better accuracy. One can also change the hyperparameters used.
 
-*TODO* Remember to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+Here is a screenshot of the HyperDrive Run Details widget
+
+![RunDetails](img/hyperdrive-01-run-details-completed.jpg "HyperDrive Run Details")
+
+And here is another one showing the best model retrieved from the HyperDrive Run.
+
+![RunDetails](img/hyperdrive-03-best-model.jpg "HyperDrive Run Details")
 
 ## Model Deployment
 
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+Since the best model from the AutoML run, Voting Ensemble, has a better accuracy than that from the HyperDrive Run, it was then deployed with Azure Container Instances (ACI).
+
+Some requests were then sent to the http endpoint using both the notebook and the command line / shell Git Bash. The `<endpoint.py>` script in this repository was used to perform the http request from the command line. Both methods showed consistent and good accuracy of the predictions.
 
 ## Screen Recording
 
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
+Below is a link to the screen recording of the deployed model in action.
 
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
+[Azure Machine Learning - AutoML and HyperDrive](https://youtu.be/zyEC8dc6ZGQ)
+
+## References
+
+- Microsoft docs and learn pages
+- Stack Overflow
+- Scikit-learn documentation
