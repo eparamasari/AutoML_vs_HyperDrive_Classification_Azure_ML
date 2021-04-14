@@ -15,7 +15,7 @@ from sklearn.metrics import mean_squared_error
 data_path = "https://raw.githubusercontent.com/eparamasari/ML_Engineer_ND_Capstone/main/data/heart_failure_clinical_records_dataset.csv"
 ds = TabularDatasetFactory.from_delimited_files(data_path)
 
-# Saving model for current iteration
+#Saving model for current iteration
 run = Run.get_context()
 
 # Cleaning data
@@ -45,10 +45,11 @@ def main():
     model = RandomForestClassifier(n_estimators=args.n_estimators, random_state=42, min_samples_split=args.min_samples_split).fit(x_train, y_train)
 
     accuracy = model.score(x_test, y_test)
-    run.log("accuracy", float(accuracy))
+    run.log("Accuracy", float(accuracy))
 
-    #Saving model for current iteration, including the value for n_estimators and min_samples_split in filename
+    # Saving model for current iteration
     os.makedirs('outputs', exist_ok=True)
+    # joblib.dump(model, 'outputs/hyperDrive_{}_{}'.format(args.n_estimators, args.min_samples_split))
     joblib.dump(value=model, filename='outputs/model.pkl')
 
 if __name__ == '__main__':
