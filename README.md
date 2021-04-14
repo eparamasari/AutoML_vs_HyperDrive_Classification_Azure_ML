@@ -87,7 +87,7 @@ Here is a screenshot of the AutoML Run Details widget while it was running.
 
 And here are some of the screenshots again when the automl run was completed. The one below shows the list of models trained.
 
-![RunDetails](img/automl-run-details-completed-01.jpg "AutoML RunDetails Widget when Completed")
+![RunDetails](img/automl-run-details-completed.jpg "AutoML RunDetails Widget when Completed")
 
 Here is one showing the different evaluation metric accuracy of the models.
 
@@ -139,7 +139,7 @@ Here is one showing the evaluation metric accuracy of the models.
 
 ![RunDetails](img/hyperdrive-run-details-metric-accuracy-02.jpg "HyperDrive Run Details showing the Evaluation Metric: Accuracy")
 
-And here is another one showing the best model retrieved from the HyperDrive Run, its parameters and metrics.
+Here is a screenshot showing the best model retrieved from the HyperDrive Run, its parameters and metrics.
 
 ![BestModel](img/hyperdrive-best-model.jpg "HyperDrive Run Details")
 
