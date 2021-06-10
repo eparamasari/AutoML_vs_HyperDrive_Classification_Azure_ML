@@ -1,6 +1,7 @@
 # Heart Failure Prediction: A Classification Model in Azure ML
 
 This project is the Capstone Project for Udacity's Machine Learning Engineer for Microsoft Azure Nanodegree.
+
 In this project, a binary classification model was trained to predict the event of heart failure. Two methods of training were done, Azure Automated ML and Hyperdrive run. From the two methode, two models were produced and both were registered.
 
 After comparing the two models based on the metric of accuracy, it was found that the one from Automated ML was better. The Automated ML model, Voting Ensemble, was then deployed using Azure Container Instances (ACI) and consumed using HTTP requests to its REST endpoint.
