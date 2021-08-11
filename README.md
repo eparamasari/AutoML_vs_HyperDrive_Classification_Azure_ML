@@ -41,7 +41,9 @@ These are the thirteen columns in the dataset, with twelve independent features 
 - serum_creatinine (float): level of serum creatinine in the blood in mg/dL
 - serum_sodium (int): level of serum sodium in the blood in mEq/L
 - sex (int): female or male (binary)
-- DEATH_EVENT (bool): whether the patient passed away
+- smoking (bool): if the patient smokes or not
+- time (int): follow-up period in days
+- DEATH_EVENT (bool): if the patient deceased during the follow-up period
 
 ### Access
 
